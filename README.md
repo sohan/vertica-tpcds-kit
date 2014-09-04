@@ -47,6 +47,7 @@ The scripts assume that you have passwordless SSH from the master node (where yo
 
 Data is landed directly in Vertica so there is no requirement for any local storage. Run the following in order:
 
+* `pip install -r requirements.txt` - Download python dependencies (recommended: use virtualenv)
 * `vertica-create-tables.sh` - Creates tables in Vertica
 * `run-gen-dims.sh` - Runs `gen-dims.sh` on the first node in dn.txt. Generate dimension data and insert into Vertica
 * `run-gen-facts.sh` - Runs `gen-facts.sh` on each DataNode via ssh to generate the `store_sales` table.
