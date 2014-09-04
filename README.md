@@ -57,6 +57,10 @@ You can run queries in a single-user or multi-user (concurrent) setting. See bel
 
 ```
 ./vertica-run-queries.sh --help
+# single user run. queries are shuffled and then run sequentially:
+./vertica-run-queries.sh --interactive --num-users 1 --num-runs 3
+
+# multi-user run. for each run, asynchronously for each user, queries shuffled and run sequentially.
 ./vertica-run-queries.sh --interactive --num-users 5 --num-runs 3
 ```
 
@@ -94,6 +98,5 @@ cat results/*-scale-5-users-3-runs/query_times.csv
 "1","4","q98","2.42102"
 "1","5","q98","2.111182"
 ...
-
 ```
 
