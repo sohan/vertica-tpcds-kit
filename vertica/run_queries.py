@@ -105,6 +105,7 @@ def run_queries(opts):
         query_fnames += REPORTING_QUERIES
     if opts.analytic:
         query_fnames += ANALYTIC_QUERIES
+    query_fnames = list(set(query_fnames)) # hack to dedupe the list
 
     queries = []
     for qname in query_fnames:
