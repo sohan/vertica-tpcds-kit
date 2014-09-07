@@ -1,6 +1,6 @@
 /* Projections were created with the Vertica Management Consol Database Designer */
 
-CREATE PROJECTION IF NOT EXISTS store_sales_DBD_1_seg_tpcsd_b0 /*+basename(store_sales_DBD_1_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS store_sales_DBD_1_seg_tpcsd_b0
 (
  ss_sold_date_sk ENCODING RLE, 
  ss_sold_time_sk ENCODING DELTARANGE_COMP, 
@@ -57,7 +57,7 @@ AS
 SEGMENTED BY MODULARHASH (ss_sold_date_sk) ALL NODES KSAFE 1;
 
 
-CREATE PROJECTION IF NOT EXISTS store_sales_DBD_2_seg_tpcsd_b0 /*+basename(store_sales_DBD_2_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS store_sales_DBD_2_seg_tpcsd_b0 
 (
  ss_sold_date_sk ENCODING RLE, 
  ss_customer_sk ENCODING DELTARANGE_COMP, 
@@ -91,7 +91,7 @@ SEGMENTED BY MODULARHASH (ss_hdemo_sk) ALL NODES KSAFE 1;
 
 
 
-CREATE PROJECTION IF NOT EXISTS store_sales_DBD_3_seg_tpcsd_b0 /*+basename(store_sales_DBD_3_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS store_sales_DBD_3_seg_tpcsd_b0 
 (
  ss_sold_date_sk ENCODING RLE, 
  ss_item_sk ENCODING GCDDELTA, 
@@ -107,7 +107,7 @@ AS
 SEGMENTED BY MODULARHASH (ss_item_sk) ALL NODES KSAFE 1;
 
 
-CREATE PROJECTION IF NOT EXISTS customer_demographics_DBD_4_seg_tpcsd_b0 /*+basename(customer_demographics_DBD_4_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS customer_demographics_DBD_4_seg_tpcsd_b0 
 (
  cd_demo_sk ENCODING COMMONDELTA_COMP, 
  cd_gender ENCODING RLE, 
@@ -136,7 +136,7 @@ AS
           cd_demo_sk
 SEGMENTED BY MODULARHASH (cd_demo_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS date_dim_DBD_5_seg_tpcsd_b0 /*+basename(date_dim_DBD_5_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS date_dim_DBD_5_seg_tpcsd_b0 
 (
  d_date_sk ENCODING COMMONDELTA_COMP, 
  d_date_id ENCODING AUTO, 
@@ -200,7 +200,7 @@ AS
  ORDER BY d_date_sk
 SEGMENTED BY MODULARHASH (d_date_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS time_dim_DBD_6_seg_tpcsd_b0 /*+basename(time_dim_DBD_6_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS time_dim_DBD_6_seg_tpcsd_b0 
 (
  t_time_sk ENCODING COMMONDELTA_COMP, 
  t_time_id ENCODING AUTO, 
@@ -233,7 +233,7 @@ AS
           t_time
 SEGMENTED BY MODULARHASH (t_time) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS item_DBD_7_seg_tpcsd_b0 /*+basename(item_DBD_7_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS item_DBD_7_seg_tpcsd_b0 
 (
  i_item_sk ENCODING DELTARANGE_COMP, 
  i_item_id ENCODING AUTO, 
@@ -286,7 +286,7 @@ AS
           i_item_sk
 SEGMENTED BY MODULARHASH (i_item_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS item_DBD_8_seg_tpcsd_b0 /*+basename(item_DBD_8_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS item_DBD_8_seg_tpcsd_b0 
 (
  i_item_sk ENCODING DELTAVAL, 
  i_item_id ENCODING AUTO, 
@@ -343,7 +343,7 @@ AS
 SEGMENTED BY MODULARHASH (i_item_sk) ALL NODES KSAFE 1;
 
 
-CREATE PROJECTION IF NOT EXISTS item_DBD_9_seg_tpcsd_b0 /*+basename(item_DBD_9_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS item_DBD_9_seg_tpcsd_b0 
 (
  i_item_sk ENCODING DELTARANGE_COMP, 
  i_brand_id ENCODING BLOCKDICT_COMP, 
@@ -361,7 +361,7 @@ AS
 SEGMENTED BY MODULARHASH (i_item_sk) ALL NODES KSAFE 1;
 
 
-CREATE PROJECTION IF NOT EXISTS store_DBD_10_seg_tpcsd_b0 /*+basename(store_DBD_10_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS store_DBD_10_seg_tpcsd_b0 
 (
  s_store_sk ENCODING AUTO, 
  s_store_id ENCODING AUTO, 
@@ -427,7 +427,7 @@ AS
  ORDER BY s_store_sk
 SEGMENTED BY MODULARHASH (s_store_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS customer_DBD_11_seg_tpcsd_b0 /*+basename(customer_DBD_11_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS customer_DBD_11_seg_tpcsd_b0 
 (
  c_customer_sk ENCODING DELTARANGE_COMP, 
  c_customer_id ENCODING AUTO, 
@@ -471,7 +471,7 @@ AS
  ORDER BY c_customer_sk
 SEGMENTED BY MODULARHASH (c_customer_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS customer_DBD_12_seg_tpcsd_b0 /*+basename(customer_DBD_12_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS customer_DBD_12_seg_tpcsd_b0 
 (
  c_customer_sk ENCODING DELTAVAL, 
  c_current_addr_sk ENCODING COMMONDELTA_COMP, 
@@ -487,7 +487,7 @@ AS
  ORDER BY c_current_addr_sk
 SEGMENTED BY MODULARHASH (c_current_addr_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS promotion_DBD_13_seg_tpcsd_b0 /*+basename(promotion_DBD_13_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS promotion_DBD_13_seg_tpcsd_b0 
 (
  p_promo_sk ENCODING COMMONDELTA_COMP, 
  p_promo_id ENCODING AUTO, 
@@ -538,7 +538,7 @@ AS
           p_promo_id
 SEGMENTED BY MODULARHASH (p_promo_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS household_demographics_DBD_14_seg_tpcsd_b0 /*+basename(household_demographics_DBD_14_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS household_demographics_DBD_14_seg_tpcsd_b0 
 (
  hd_demo_sk ENCODING COMMONDELTA_COMP, 
  hd_income_band_sk ENCODING COMMONDELTA_COMP, 
@@ -559,7 +559,7 @@ AS
           hd_demo_sk
 SEGMENTED BY MODULARHASH (hd_demo_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS customer_address_DBD_15_seg_tpcsd_b0 /*+basename(customer_address_DBD_15_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS customer_address_DBD_15_seg_tpcsd_b0 
 (
  ca_address_sk ENCODING COMMONDELTA_COMP, 
  ca_address_id ENCODING AUTO, 
@@ -593,7 +593,7 @@ AS
  ORDER BY ca_address_sk
 SEGMENTED BY MODULARHASH (ca_address_sk) ALL NODES KSAFE 1;
 
-CREATE PROJECTION IF NOT EXISTS inventory_DBD_16_seg_tpcsd_b0 /*+basename(inventory_DBD_16_seg_tpcsd),createtype(D)*/
+CREATE PROJECTION IF NOT EXISTS inventory_DBD_16_seg_tpcsd_b0 
 (
  inv_date_sk ENCODING AUTO, 
  inv_item_sk ENCODING AUTO, 
