@@ -16,7 +16,7 @@ import csv
 import datetime
 
 INTERACTIVE_QUERIES = ['q19', 'q42', 'q52', 'q55', 'q63', 'q68', 'q73', 'q98']
-REPORTING_QUERIES = ['q3', 'q7', 'q27', 'q54', 'q53', 'q89']
+REPORTING_QUERIES = ['q3', 'q7', 'q27', 'q43', 'q53', 'q89']
 ANALYTIC_QUERIES = ['q34', 'q46', 'q59', 'q79', 'ss_max']
 
 OUTPUT_LOCK = threading.Lock()
