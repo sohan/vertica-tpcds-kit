@@ -1,4 +1,5 @@
 from common import get_ssh_client, vsql, get_parser
+import os
 
 CREATE_TABLE_STMTS = [
 
@@ -260,9 +261,25 @@ def create_tables(opts):
 
     vsql(ssh_client, opts, '\\d')
 
+def create_projections(opts):
+    ssh_client = get_ssh_client(opts)
+    with open(os.path.join(os.path.dirname(__file__), 'projections.sql')) as fh:
+        projections_sql = fh.read()
+        vsql(ssh_client, opts, projections_sql)
+
+def refresh_projections(opts):
+    ssh_client = get_ssh_client(opts)
+    vsql(ssh_client, opts, 'SELECT START_REFRESH()')
+
 if __name__ == '__main__':
     parser = get_parser('Create TPC-SD tables in vertica')
     parser.add_argument('--delete', action='store_true', help='Drop existing tables')
+    parser.add_argument('--create-projections', action='store_true', help='Create projections for tables.')
+    parser.add_argument('--refresh-projections', action='store_true', help='Refresh projections.')
     opts = parser.parse_args()
     create_tables(opts)
+    if opts.create_projections:
+        create_projections(opts)
+    if opts.refresh_projections:
+        refresh_projections(opts)
 
