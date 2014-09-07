@@ -54,7 +54,7 @@ AS
  ORDER BY ss_sold_date_sk,
           ss_store_sk,
           ss_net_profit
-SEGMENTED BY MODULARHASH (ss_sold_date_sk);
+SEGMENTED BY MODULARHASH (ss_sold_date_sk) ALL NODES;
 
 
 CREATE PROJECTION IF NOT EXISTS store_sales_DBD_2_seg_tpcsd_b0 /*+basename(store_sales_DBD_2_seg_tpcsd),createtype(D)*/
@@ -87,7 +87,7 @@ AS
  ORDER BY ss_sold_date_sk,
           ss_store_sk,
           ss_net_profit
-SEGMENTED BY MODULARHASH (ss_hdemo_sk);
+SEGMENTED BY MODULARHASH (ss_hdemo_sk) ALL NODES;
 
 
 
@@ -104,7 +104,7 @@ AS
  FROM public.store_sales 
  ORDER BY ss_sold_date_sk,
           ss_ext_sales_price
-SEGMENTED BY MODULARHASH (ss_item_sk);
+SEGMENTED BY MODULARHASH (ss_item_sk) ALL NODES;
 
 
 CREATE PROJECTION IF NOT EXISTS customer_demographics_DBD_4_seg_tpcsd_b0 /*+basename(customer_demographics_DBD_4_seg_tpcsd),createtype(D)*/
@@ -134,7 +134,7 @@ AS
           cd_gender,
           cd_education_status,
           cd_demo_sk
-SEGMENTED BY MODULARHASH (cd_demo_sk);
+SEGMENTED BY MODULARHASH (cd_demo_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS date_dim_DBD_5_seg_tpcsd_b0 /*+basename(date_dim_DBD_5_seg_tpcsd),createtype(D)*/
 (
@@ -198,7 +198,7 @@ AS
         d_current_year
  FROM public.date_dim 
  ORDER BY d_date_sk
-SEGMENTED BY MODULARHASH (d_date_sk);
+SEGMENTED BY MODULARHASH (d_date_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS time_dim_DBD_6_seg_tpcsd_b0 /*+basename(time_dim_DBD_6_seg_tpcsd),createtype(D)*/
 (
@@ -231,7 +231,7 @@ AS
           t_meal_time,
           t_hour,
           t_time
-SEGMENTED BY MODULARHASH (t_time);
+SEGMENTED BY MODULARHASH (t_time) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS item_DBD_7_seg_tpcsd_b0 /*+basename(item_DBD_7_seg_tpcsd),createtype(D)*/
 (
@@ -284,7 +284,7 @@ AS
  FROM public.item 
  ORDER BY i_manager_id,
           i_item_sk
-SEGMENTED BY MODULARHASH (i_item_sk);
+SEGMENTED BY MODULARHASH (i_item_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS item_DBD_8_seg_tpcsd_b0 /*+basename(item_DBD_8_seg_tpcsd),createtype(D)*/
 (
@@ -340,7 +340,7 @@ AS
           i_item_id,
           i_item_desc,
           i_current_price
-SEGMENTED BY MODULARHASH (i_item_sk);
+SEGMENTED BY MODULARHASH (i_item_sk) ALL NODES;
 
 
 CREATE PROJECTION IF NOT EXISTS item_DBD_9_seg_tpcsd_b0 /*+basename(item_DBD_9_seg_tpcsd),createtype(D)*/
@@ -358,7 +358,7 @@ AS
  FROM public.item 
  ORDER BY i_manufact_id,
           i_item_sk
-SEGMENTED BY MODULARHASH (i_item_sk);
+SEGMENTED BY MODULARHASH (i_item_sk) ALL NODES;
 
 
 CREATE PROJECTION IF NOT EXISTS store_DBD_10_seg_tpcsd_b0 /*+basename(store_DBD_10_seg_tpcsd),createtype(D)*/
@@ -425,7 +425,7 @@ AS
         s_tax_precentage
  FROM public.store 
  ORDER BY s_store_sk
-SEGMENTED BY MODULARHASH (s_store_sk);
+SEGMENTED BY MODULARHASH (s_store_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS store_DBD_10_seg_tpcsd_b1 /*+basename(store_DBD_10_seg_tpcsd),createtype(D)*/
 (
@@ -491,7 +491,7 @@ AS
         s_tax_precentage
  FROM public.store 
  ORDER BY s_store_sk
-SEGMENTED BY MODULARHASH (s_store_sk);
+SEGMENTED BY MODULARHASH (s_store_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS customer_DBD_11_seg_tpcsd_b0 /*+basename(customer_DBD_11_seg_tpcsd),createtype(D)*/
 (
@@ -535,7 +535,7 @@ AS
         c_last_review_date
  FROM public.customer 
  ORDER BY c_customer_sk
-SEGMENTED BY MODULARHASH (c_customer_sk);
+SEGMENTED BY MODULARHASH (c_customer_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS customer_DBD_12_seg_tpcsd_b0 /*+basename(customer_DBD_12_seg_tpcsd),createtype(D)*/
 (
@@ -551,7 +551,7 @@ AS
         c_last_name
  FROM public.customer 
  ORDER BY c_current_addr_sk
-SEGMENTED BY MODULARHASH (c_current_addr_sk);
+SEGMENTED BY MODULARHASH (c_current_addr_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS promotion_DBD_13_seg_tpcsd_b0 /*+basename(promotion_DBD_13_seg_tpcsd),createtype(D)*/
 (
@@ -602,7 +602,7 @@ AS
           p_response_target,
           p_channel_catalog,
           p_promo_id
-SEGMENTED BY MODULARHASH (p_promo_sk);
+SEGMENTED BY MODULARHASH (p_promo_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS household_demographics_DBD_14_seg_tpcsd_b0 /*+basename(household_demographics_DBD_14_seg_tpcsd),createtype(D)*/
 (
@@ -623,7 +623,7 @@ AS
           hd_vehicle_count,
           hd_dep_count,
           hd_demo_sk
-SEGMENTED BY MODULARHASH (hd_demo_sk);
+SEGMENTED BY MODULARHASH (hd_demo_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS customer_address_DBD_15_seg_tpcsd_b0 /*+basename(customer_address_DBD_15_seg_tpcsd),createtype(D)*/
 (
@@ -657,7 +657,7 @@ AS
         ca_location_type
  FROM public.customer_address 
  ORDER BY ca_address_sk
-SEGMENTED BY MODULARHASH (ca_address_sk);
+SEGMENTED BY MODULARHASH (ca_address_sk) ALL NODES;
 
 CREATE PROJECTION IF NOT EXISTS inventory_DBD_16_seg_tpcsd_b0 /*+basename(inventory_DBD_16_seg_tpcsd),createtype(D)*/
 (
@@ -676,5 +676,5 @@ AS
           inv_item_sk,
           inv_warehouse_sk,
           inv_quantity_on_hand
-SEGMENTED BY MODULARHASH (inv_date_sk, inv_item_sk, inv_warehouse_sk, inv_quantity_on_hand);
+SEGMENTED BY MODULARHASH (inv_date_sk, inv_item_sk, inv_warehouse_sk, inv_quantity_on_hand) ALL NODES;
 
