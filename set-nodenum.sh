@@ -7,6 +7,6 @@ n=1
 cat dn.txt | while read h
 do 
   echo "$h = $n"
-  ssh $SSH_OPTS $CLUSTER_USER@$h "echo export NODENUM=${n} > $CLUSTER_HOMEDIR/$MPP_TPCDS_DIRNAME/nodenum.sh" < /dev/null
+  ssh $SSH_OPTS $CLUSTER_USER@$h "echo export NODENUM=${n} > $CLUSTER_HOMEDIR/$MPP_TPCDS_DIR/nodenum.sh" < /dev/null
   ((n=n+1))
 done
