@@ -256,7 +256,7 @@ def create_tables(opts):
     ssh_client = get_ssh_client(opts)
     for tbl_name, tbl_stmt in CREATE_TABLE_STMTS:
         if opts.delete:
-            vsql(ssh_client, opts, 'DROP TABLE IF EXISTS %s' % tbl_name)
+            vsql(ssh_client, opts, 'DROP TABLE IF EXISTS %s CASCADE' % tbl_name)
         vsql(ssh_client, opts, tbl_stmt)
 
     vsql(ssh_client, opts, '\\d')
