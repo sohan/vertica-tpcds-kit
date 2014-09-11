@@ -1,3 +1,5 @@
+export SSH_OPTS="-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
 export VERTICA_HOST="10.0.0.1"
 export VERTICA_DB="dw"
 export VERTICA_USER="dbadmin"

@@ -6,7 +6,7 @@ source tpcds-env.sh
 
 cat dn.txt | while read h
 do 
-  ssh $CLUSTER_USER@$h "cd $CLUSTER_HOMEDIR/$MPP_TPCDS_DIR; ./gen-facts.sh" < /dev/null &
+  ssh $SSH_OPTS $CLUSTER_USER@$h "cd $CLUSTER_HOMEDIR/$MPP_TPCDS_DIR; ./gen-facts.sh" < /dev/null &
 done
 wait
 
