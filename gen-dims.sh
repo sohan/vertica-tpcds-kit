@@ -3,7 +3,7 @@ source tpcds-env.sh
 
 TPCDS_ROOT="${CLUSTER_HOMEDIR}/${TPCDS_DIR}"
 
-for t in date_dim time_dim customer customer_address customer_demographics household_demographics item promotion store
+for t in date_dim time_dim customer customer_address customer_demographics household_demographics item promotion store inventory
 do
   echo "Generating table $t"
   ${TPCDS_ROOT}/tools/dsdgen \
