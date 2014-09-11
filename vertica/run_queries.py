@@ -71,11 +71,19 @@ def _mark_time_for_user_query_run(output_dir, run_number, user_num, q_name, time
             print row
 
 def _get_results_dir(opts):
+    query_types = []
+    if opts.analytic:
+        query_types.append('analytic')
+    if opts.interactive:
+        query_types.append('interactive')
+    if opts.reporting:
+        query_types.append('reporting')
     return os.path.join(opts.base_results_dir,
-            '{0}-scale-{1}-users-{2}-runs'.format(
+            '{0}-scale-{1}-users-{2}-runs-{3}'.format(
                 os.environ.get('TPCDS_SCALE_FACTOR'),
                 opts.num_users,
-                opts.num_runs))
+                opts.num_runs,
+                '_'.join(query_types)))
 
 def _write_metadata(results_dir, opts, queries):
     with open(os.path.join(results_dir, 'metadata.json'), 'wb') as fh:
