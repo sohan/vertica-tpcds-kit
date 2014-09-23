@@ -45,7 +45,6 @@ def _run_query_and_get_time(_run_query, sql):
     '''
     stdout, stderr = _run_query(sql)
     timing_str = '\n'.join(stderr[-5:-1]).strip()
-    import ipdb; ipdb.set_trace()
     t_s = _get_time_from_result_str(timing_str)
     return t_s
 
