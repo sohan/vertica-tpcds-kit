@@ -25,8 +25,8 @@ def get_ssh_client(opts):
 def ssh_vertica(ssh_client, command):
     stdin, stdout, stderr = ssh_client.exec_command(command.strip())
 
-    stdout = list(stdout)
-    stderr = list(stderr)
+    stdout = stdout.readlines()
+    stderr = stderr.readlines()
     for i, line in enumerate(stdout):
         line = line.rstrip()
         print "%d\t%s" % (i, line)

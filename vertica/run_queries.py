@@ -27,7 +27,7 @@ def _daemon_worker_factory(job_queue):
     Set the thread to run as a daemon.
     '''
     w = workerpool.Worker(job_queue)
-    w.setDaemon(True)
+    #w.setDaemon(True)
     return w
 
 def _get_time_from_result_str(result_str):
@@ -48,14 +48,24 @@ def _run_query_and_get_time(_vsql, sql):
     t_ms = _get_time_from_result_str(timing_str)
     return t_ms/1000.0
 
-def _run_queries_for_user(_vsql, output_dir, run_number, user_num, query_list):
+def _run_queries_for_user(opts, output_dir, run_number, user_num, query_list):
     '''
     Run queries in `query_list` for user `user_num`
     Queries run sequentially for the user
     Write the query times to file as they finish
     '''
     for q_name, sql in query_list:
-        time_s = _run_query_and_get_time(_vsql, sql)
+        ssh_client = None
+        try:
+            ssh_client = get_ssh_client(opts)
+            _vsql = lambda s: vsql(ssh_client, opts, s)
+            time_s = _run_query_and_get_time(_vsql, sql)
+        except:
+            import traceback; traceback.print_exc()
+            time_s = 0.0
+        finally:
+            if ssh_client:
+                ssh_client.close()
         _mark_time_for_user_query_run(output_dir, run_number, user_num, q_name, time_s)
 
 def _mark_time_for_user_query_run(output_dir, run_number, user_num, q_name, time_s, mode='a+b'):
@@ -131,26 +141,22 @@ def run_queries(opts):
     _mark_time_for_user_query_run(results_dir, 'run_number', 'user', 'query', 'time_s', 'wb')
     _write_metadata(results_dir, opts, queries)
 
-    workers = workerpool.WorkerPool(size=opts.num_users,
-                                    worker_factory=_daemon_worker_factory)
     results = Queue.Queue()
     print 'starting runs, writing to ', results_dir
     for run_num in xrange(1, opts.num_runs + 1):
+        workers = workerpool.WorkerPool(size=opts.num_users,
+                                        worker_factory=_daemon_worker_factory)
         for user_num in xrange(1, opts.num_users + 1):
-            query_list = copy.copy(queries)
+            query_list = copy.deepcopy(queries)
             random.shuffle(query_list)
-            ssh_client = get_ssh_client(opts)
-            _vsql = lambda s: vsql(ssh_client, opts, s)
             workers.put(workerpool.SimpleJob(results,
                                              _run_queries_for_user,
-                                             [_vsql, results_dir, run_num,
+                                             [opts, results_dir, run_num,
                                               user_num, query_list]))
         print 'waiting for jobs to complete in run ', run_num
         workers.join()
+        workers.shutdown()
         print 'finished run', run_num
-
-    workers.shutdown()
-    workers.join()
 
 if __name__ == '__main__':
     parser = get_parser('Create TPC-SD tables in vertica')
