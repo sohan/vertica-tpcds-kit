@@ -4,7 +4,7 @@ import re
 
 def get_parser(description='TPC-SD Vertica'):
     parser = argparse.ArgumentParser(description=description)
-    parser.add_argument('--impala-hostname', required=True, help='host of an impala data node')
+    parser.add_argument('--impala-host', required=True, help='host of an impala data node')
     return parser
 
 def sanitize_cmd(cmd):
@@ -14,7 +14,7 @@ def sanitize_cmd(cmd):
 def get_ssh_client(opts):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh.connect(opts.vertica_host, username='ubuntu')
+    ssh.connect(opts.impala_host, username='ubuntu')
     return ssh
 
 def _ssh(ssh_client, command):

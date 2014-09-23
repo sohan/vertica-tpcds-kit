@@ -32,7 +32,7 @@ def _daemon_worker_factory(job_queue):
 
 def _get_time_from_result_str(result_str):
     '''
-    Parse vsql output to get the time it took to run a query
+    Parse impala shell output to get the time it took to run a query
     '''
     match = re.search('Returned .* in (\d+\.?\d+)s', result_str)
     if match:
@@ -40,13 +40,14 @@ def _get_time_from_result_str(result_str):
 
 def _run_query_and_get_time(_run_query, sql):
     '''
-    Run a query with vsql with \timing enabled,
+    Run a query with impala-shell
     and parse the time the query took
     '''
     stdout, stderr = _run_query(sql)
-    timing_str = stdout[-1].strip()
-    t_ms = _get_time_from_result_str(timing_str)
-    return t_ms/1000.0
+    timing_str = '\n'.join(stderr[-5:-1]).strip()
+    import ipdb; ipdb.set_trace()
+    t_s = _get_time_from_result_str(timing_str)
+    return t_s
 
 def _run_queries_for_user(opts, output_dir, run_number, user_num, query_list):
     '''
